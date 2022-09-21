@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>부산대학교</title>
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/script.js"></script>
+<script>
+$(document).ready(function(){
+    mobile_menu();
+});
+
+function mobile_menu(){
+    /* 변수 선언 */
+    var $menu = null;
+    var $left_gnb = null; // 영역 전체
+    var $depth1_wrap = null;
+    var $depth1 = null;
+    var $depth1_btn = null;
+    
+    /* 시작 함수 */
+    function start(){
+        init();
+        init_event();
+    }
+    /* 변수 초기화 함수 */
+    function init(){
+        $menu = $('.menu');
+        $left_gnb = $('.left_gnbWrap'); // 영역 전체
+        $depth1_wrap = $('.left_gnb>li');
+        $depth1 = $depth1_wrap.children('ul');
+        $depth1_btn = $depth1_wrap.children('a');
+    }
+    /* 이벤트 함수 */
+    function init_event(){
+        
+        /* 모바일 메뉴 버튼 클릭했을때 모바일 메뉴영역 나오게 하기 */
+        $menu.click(function(event){
+            event.preventDefault();
+            $left_gnb.addClass('on');
+        });
+        
+        /* x버튼 눌렀을때 모바일 메뉴 닫기 */
+        $('.close').click(function(event){
+            event.preventDefault();
+
+            $left_gnb.removeClass('on');
+            
+            // x버튼 누르면 시간차 약간두고 소메뉴 닫히게 하기
+            setTimeout(function(){
+                $depth1_btn.removeClass('on');
+                $depth1.slideUp();
+            },300)
+        });
+        
+        /* depth1의 각메뉴 클릭시 depth2 나오게 하기 */
+        $depth1_btn.click(function(event){
+            event.preventDefault();
+            var $this = $(this);
+            var $this_ul = $this.siblings('ul');
+
+            var check = $this.hasClass('on');
+            if(check){
+                $this.removeClass('on');
+                $this_ul.stop(true,true).slideUp();
+            }else{
+                $depth1_btn.removeClass('on');
+                $depth1.stop().slideUp();
+                $this.addClass('on');
+                $this_ul.stop(true,true).slideDown();
+            }
+        });
+        
+        /* 디바이스 크기 변경시 모바일 메뉴영역 숨기기 */
+        $(window).resize(function(){
+            $left_gnb.removeClass('on');
+        });
+    }
+    
+    start(); // 시작 호출
+}
+</script>
+</head>
+
+<body>
+    <div id="wrap">
+        <div id="header">
+            <ul class="h_icon">
+                <li>
+                    <img src="img/icon_1.png" alt="홈">
+                </li>
+                <li>
+                    <img src="img/icon_2.png" alt="돋보기">
+                </li>
+                <li>
+                    <img src="img/icon_3.png" alt="지구">
+                </li>
+            </ul>
+            <div class="logo">
+                <img src="img/logo.png" alt="로고">
+            </div>
+            <div class="h_menu">
+                <div>
+                    로그인
+                </div>
+                <div>
+                    주요서비스
+                </div>
+                <div class="menu">
+                    <a href="#"><img src="img/menu.png"></a>
+                  </div>
+                  <nav class="left_gnbWrap">
+                              <a href="#" class="close"><img src="img/close2.png"></a>
+                              <ul class="left_gnb">
+                                  <li>
+                                      <a href="#">대학/대학원</a>
+                                      <ul>
+                                          <li><a href="#">대학·학부</a></li>
+                                          <li><a href="#">대학원</a></li>
+                                          <li><a href="#">전문대학원</a></li>
+                                          <li><a href="#">특수대학원</a></li>
+                                          <li><a href="#">교양교육원</a></li>
+                                      </ul>
+                                  </li>
+                                  <li>
+                                      <a href="#">입학/취업</a>
+                                      <ul>
+                                          <li><a href="#">입학홈페이지</a></li>
+                                          <li><a href="#">취업전략과</a></li>
+                                          <li><a href="#">채용속보</a></li>
+                                          <li><a href="#">청년일자리</a></li>
+                                      </ul>
+                                  </li>
+                                  <li>
+                                      <a href="#">연구/산학</a>
+                                      <ul>
+                                          <li><a href="#">PNU리서치</a></li>
+                                          <li><a href="#">연구기관</a></li>
+                                          <li><a href="#">산학협력</a></li>
+                                      </ul>
+                                  </li>
+                                  <li>
+                                      <a href="#">대학생활</a>
+                                      <ul>
+                                        <li><a href="sub.html">PNU NEWS</a></li>
+                                          <li><a href="#">학생지원기관</a></li>
+                                          <li><a href="#">정보서비스</a></li>
+                                          <li><a href="#">학사/학술</a></li>
+                                          <li><a href="#">캠퍼스라이프</a></li>
+                                      </ul>
+                                  </li>
+                                  <li>
+                                    <a href="#">공지/참여</a>
+                                    <ul>
+                                        <li><a href="#">공지사항</a></li>
+                                        <li><a href="#">PNU건의함</a></li>
+                                        <li><a href="#">시민정책제안</a></li>
+                                        <li><a href="#">교수초빙</a></li>
+                                    </ul>
+                                </li>
+                              </ul>
+                          </nav>
+                <!-- 초기화 -->
+            </div>
+            <!-- 초기화 -->
+        </div>
+        <div id="mainimg">
+            <div class="blackbox">
+            </div>
+            <div class="inner">
+                <div class="main_text">
+                    <h1>
+                        시대를 열어가는 담대한 지성,<br>
+                        부산대학교
+                    </h1>
+                    <p>
+                        우리 대학은 진리, 자유, 봉사의 정신을 실현하는 참 대학으로서<br>
+                        인류애를 기반으로 시대의 흐름을 통찰한 새로운 가치 체계를 만들어<br>
+                        지역과 국가 그리고 인류 사회의 발전에 기여하는 학문 연구와<br>
+                        인재 양성을 통해 사회의 미래 비전을 제시하고 실천합니다.
+                    </p>
+                    <div class="btn1">
+                        입학안내
+                    </div>
+                </div>
+               
+</div>
+        </div>
+        <div class="m_text">
+            <h1>
+                시대를 열어가는 담대한 지성,<br>
+                부산대학교
+            </h1>
+            <p>
+                우리 대학은 진리, 자유, 봉사의 정신을 실현하는 참 대학으로서<br>
+                인류애를 기반으로 시대의 흐름을 통찰한 새로운 가치 체계를 만들어<br>
+                지역과 국가 그리고 인류 사회의 발전에 기여하는 학문 연구와<br>
+                인재 양성을 통해 사회의 미래 비전을 제시하고 실천합니다.
+            </p>
+            <div class="btn1">
+                입학안내
+            </div>
+        </div>
+        <div id="contents">
+            <div class="box1">
+                <div class="inner">
+                    <h2>
+                        PNU NEWS
+                    </h2>
+                    <div class="box1_set">
+                        <div class="list">
+                            <div class="list_box">
+                                <p>
+                                    [자연대 소식]
+                                </p>
+                                <h3>
+                                    학술상 및 동문상 시상식 개최
+                                </h3>
+                                <div>
+                                    <img src="img/news1.jpg" alt="뉴스1">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list">
+                            <div class="list_box">
+                                <p>
+                                    [보도자료]
+                                </p>
+                                <h3>
+                                    부산대, '고교교육<br>
+                                    기여대학 지원사업' 선정
+                                </h3>
+                                <h3 class="w_h3">
+                                    부산대, '고교교육 기여대학 지원사업' 선정
+                                </h3>
+                                <div>
+                                    <img src="img/news2.jpg" alt="뉴스2">
+                                </div>
+                            </div>
+                        </div>
+                        <a href="sub.html">
+                        <div class="list">
+                            <div class="list_box">
+                                <p>
+                                    [영상뉴스]
+                                </p>
+                                <h3>
+                                    4년 만에 다시 개최된 대동제
+                                </h3>
+                                <div>
+                                    <img src="img/news3.jpg" alt="뉴스3">
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                        <!-- 초기화 -->
+                    </div>
+                </div>
+            </div>
+            <div class="box2">
+                <div class="inner">
+                    <h2>
+                        PNU LIFE
+                    </h2>
+                    <div class="box2_set">
+                        <div class="box2_1">
+                            <div class="box2_1_t">
+                                <div class="border">
+                                    <div class="s_icon">
+                                        <img src="img/student_icon.png" alt="학생지원시스템">
+                                    </div>
+                                    <div class="s_text">
+                                        학생지원시스템 바로가기
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box2_1_b">
+                                <div class="border">
+                                    <div class="t_icon">
+                                        <img src="img/tour_icon.png" alt="캠퍼트 투어">
+                                    </div>
+                                    <div class="t_text">
+                                        캠퍼스 투어 신청하기
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box2_2">
+                            <div class="border_blue">
+                                <h3>
+                                    도서관 가이드
+                                </h3>
+                                <img src="img/library.jpg" alt="도서관">
+                                <div class="text">
+                                <p class="p_bluetext">
+                                    새벽벌도서관 
+                                    <span>
+                                        자세히 알아보기
+                                    </span>
+                                </p>
+                                <p class="m_bluetext">
+                                    새벽벌도서관 <br>
+                                    <span>
+                                        자세히 알아보기
+                                    </span>
+                                </p>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="box2_3">
+                            <div class="border_green">
+                                <h3>
+                                    효원 커뮤니티
+                                </h3>
+                                <img src="img/community.jpg" alt="커뮤니티">
+                                <div class="text">
+                                <p class="p_greentext">
+                                    커뮤니티 
+                                    <span>
+                                        게시판 바로가기
+                                    </span>
+                                </p>
+                                <p class="m_greentext">
+                                    커뮤니티 <br>
+                                    <span>
+                                        게시판 바로가기
+                                    </span>
+                                </p>
+                            </div>
+                            </div>
+                        </div>
+                        <!-- 초기화 -->
+                    </div>
+                </div>
+            </div>
+            <div class="box3">
+                <div class="inner">
+                    <div class="pusan">
+                        <div class="white_bg">
+                            <h3>
+                                부산캠퍼스
+                            </h3>
+                            <p>
+                                종합교육, 연구의 중심
+                            </p>
+                            <div class="btn">
+                                캠퍼스맵
+                            </div>
+                        </div>
+                    </div>
+                    <div class="yangsan">
+                        <div class="white_bg">
+                            <h3>
+                                양산캠퍼스
+                            </h3>
+                            <p>
+                                의/생명 특성화 캠퍼스
+                            </p>
+                            <div class="btn">
+                                캠퍼스맵
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 초기화 -->
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+            <div class="inner">
+                <div class="copyright">
+                    <p class="p_copyright">
+                        부산캠퍼스 : 46241 부산광역시 금정구 부산대학로63번길 2 (장전동) TEL : 051.512.0311<br>
+                        양산캠퍼스 : 50612 경상남도 양산시 물금읍 부산대학로 49 TEL : 051. 512.0311<br>
+                        밀양캠퍼스 : 50463 경상남도 밀양시 삼랑진읍 삼랑진로 1268-50 TEL : 055.350.5100<br>
+                        아미캠퍼스 : 49241 부산광역시 서구 구덕로 179 (아미동 1가) TEL : 051.240.7000
+                    </p>
+                    <p class="m_copyright">
+                        부산캠퍼스 : 46241 부산광역시 금정구 부산대학로63번길 2
+                        <br> (장전동) TEL : 051.512.0311<br>
+                        양산캠퍼스 : 50612 경상남도 양산시 물금읍 부산대학로 49 
+                        <br>
+                        TEL : 051. 512.0311
+                    </p>
+                    <p>
+                        Copyright 2022 Pusan National University. All rights reserved.
+                    </p>
+                </div>
+                <div class="logo_f">
+                    <img src="img/logo_f.png" alt="푸터로고">
+                </div>
+                <!-- 초기화 -->
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

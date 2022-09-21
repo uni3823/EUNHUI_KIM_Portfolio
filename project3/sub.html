@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sub</title>
+    <link href="css/style2.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        mobile_menu();
+    });
+    
+    function mobile_menu(){
+        /* 변수 선언 */
+        var $menu = null;
+        var $left_gnb = null; // 영역 전체
+        var $depth1_wrap = null;
+        var $depth1 = null;
+        var $depth1_btn = null;
+        
+        /* 시작 함수 */
+        function start(){
+            init();
+            init_event();
+        }
+        /* 변수 초기화 함수 */
+        function init(){
+            $menu = $('.menu');
+            $left_gnb = $('.left_gnbWrap'); // 영역 전체
+            $depth1_wrap = $('.left_gnb>li');
+            $depth1 = $depth1_wrap.children('ul');
+            $depth1_btn = $depth1_wrap.children('a');
+        }
+        /* 이벤트 함수 */
+        function init_event(){
+            
+            /* 모바일 메뉴 버튼 클릭했을때 모바일 메뉴영역 나오게 하기 */
+            $menu.click(function(event){
+                event.preventDefault();
+                $left_gnb.addClass('on');
+            });
+            
+            /* x버튼 눌렀을때 모바일 메뉴 닫기 */
+            $('.close').click(function(event){
+                event.preventDefault();
+    
+                $left_gnb.removeClass('on');
+                
+                // x버튼 누르면 시간차 약간두고 소메뉴 닫히게 하기
+                setTimeout(function(){
+                    $depth1_btn.removeClass('on');
+                    $depth1.slideUp();
+                },300)
+            });
+            
+            /* depth1의 각메뉴 클릭시 depth2 나오게 하기 */
+            $depth1_btn.click(function(event){
+                event.preventDefault();
+                var $this = $(this);
+                var $this_ul = $this.siblings('ul');
+    
+                var check = $this.hasClass('on');
+                if(check){
+                    $this.removeClass('on');
+                    $this_ul.stop(true,true).slideUp();
+                }else{
+                    $depth1_btn.removeClass('on');
+                    $depth1.stop().slideUp();
+                    $this.addClass('on');
+                    $this_ul.stop(true,true).slideDown();
+                }
+            });
+            
+            /* 디바이스 크기 변경시 모바일 메뉴영역 숨기기 */
+            $(window).resize(function(){
+                $left_gnb.removeClass('on');
+            });
+        }
+        
+        start(); // 시작 호출
+    }
+    </script>
+</head>
+
+<body>
+    <div id="wrap">
+        <div id="header">
+            <ul class="h_icon">
+                <li>
+                    <img src="img/icon_1.png" alt="홈">
+                </li>
+                <li>
+                    <img src="img/icon_2.png" alt="돋보기">
+                </li>
+                <li>
+                    <img src="img/icon_3.png" alt="지구">
+                </li>
+            </ul>
+            <a href="index.html">
+            <div class="logo">
+                <img src="img/logo.png" alt="로고">
+            </div>
+        </a>
+        <div class="h_menu">
+            <div>
+                로그인
+            </div>
+            <div>
+                주요서비스
+            </div>
+            <div class="menu">
+                <a href="#"><img src="img/menu.png"></a>
+              </div>
+              <nav class="left_gnbWrap">
+                          <a href="#" class="close"><img src="img/close2.png"></a>
+                          <ul class="left_gnb">
+                              <li>
+                                  <a href="#">대학/대학원</a>
+                                  <ul>
+                                      <li><a href="#">대학·학부</a></li>
+                                      <li><a href="#">대학원</a></li>
+                                      <li><a href="#">전문대학원</a></li>
+                                      <li><a href="#">특수대학원</a></li>
+                                      <li><a href="#">교양교육원</a></li>
+                                  </ul>
+                              </li>
+                              <li>
+                                  <a href="#">입학/취업</a>
+                                  <ul>
+                                      <li><a href="#">입학홈페이지</a></li>
+                                      <li><a href="#">취업전략과</a></li>
+                                      <li><a href="#">채용속보</a></li>
+                                      <li><a href="#">청년일자리</a></li>
+                                  </ul>
+                              </li>
+                              <li>
+                                  <a href="#">연구/산학</a>
+                                  <ul>
+                                      <li><a href="#">PNU리서치</a></li>
+                                      <li><a href="#">연구기관</a></li>
+                                      <li><a href="#">산학협력</a></li>
+                                  </ul>
+                              </li>
+                              <li>
+                                  <a href="#">대학생활</a>
+                                  <ul>
+                                     <li><a href="#">PNU NEWS</a></li>
+                                      <li><a href="#">학생지원기관</a></li>
+                                      <li><a href="#">정보서비스</a></li>
+                                      <li><a href="#">학사/학술</a></li>
+                                      <li><a href="#">캠퍼스라이프</a></li>
+                                  </ul>
+                              </li>
+                              <li>
+                                <a href="#">공지/참여</a>
+                                <ul>
+                                    <li><a href="#">공지사항</a></li>
+                                    <li><a href="#">PNU건의함</a></li>
+                                    <li><a href="#">시민정책제안</a></li>
+                                    <li><a href="#">교수초빙</a></li>
+                                </ul>
+                            </li>
+                          </ul>
+                      </nav>
+                <!-- 초기화 -->
+            </div>
+            <!-- 초기화 -->
+        </div>
+        <div id="sub_mainimg"></div>
+        <div id="sub_contents">
+            <div class="inner">
+                <h1>
+                    PNU NEWS
+                </h1>
+                <ul class="tab">
+                    <li>영상뉴스</li>
+                    <li>카드뉴스</li>
+                    <li>학과별 소식</li>
+                    <li>보도자료</li>
+                    <li>교수칼럼</li>
+                    <li>PNU FOCUS</li>
+                    <!-- 초기화 -->
+                </ul>
+                <h2>
+                    영상뉴스
+                </h2>
+                <div class="mainnews">
+                    <div class="news_l"></div>
+                    <div class="news_r">
+                        <div class="news_text">
+                            <h3>
+                                4년 만에 다시 개최된 대동제
+                            </h3>
+                            <p>
+                                부산대가 4년 만에 대학 축제 「대동제」를 개최해, <br>
+                                운집한 1만여 명의 함성으로 캠퍼스를 뜨겁게 물들였다.
+                            </p>
+                            <p>
+                                부산대와 총학생회는 5월 17일부터 19일까지 사흘간 <br>
+                                ‘드디어, 대동하다!’라는 주제로 학내 곳곳에서 「2022학년도 <br>
+                                부산대학교 대동제」 축제를 개최했다.
+                            </p>
+                            <p>
+                                이는 최근 들어 코로나19 감소세가 뚜렷해지면서 <br>
+                                대면수업으로의 복귀 등 대학의 일상회복 전환 시점에서 <br>
+                                그동안 어려움을 겪어 온 학생과 지역주민들에게 용기를 주고 <br>
+                                격려하며, 학생회 중심의 자치활동 활성화도 <br>
+                                적극 지원하고자 추진된 것이다.
+                            </p>
+                        </div>
+                        <div class="scroll">
+                            <img src="img/scroll.jpg" alt="스크롤바">
+                        </div>
+                    </div>
+                    <!-- 초기화 -->
+                </div>
+                <div class="subnews">
+                    <div class="btn_l">
+                        <img src="img/btn_l.png" alt="왼쪽">
+                    </div>
+                    <div class="btn_r">
+                        <img src="img/btn_r.png" alt="오른쪽">
+                    </div>
+                    <div class="sub_list1">
+                        <div>
+                            <img src="img/sub_img2.jpg" alt="개교기념식">
+                        </div>
+                        <div class="sub_text">
+                            제76주년 개교기념식…<br>
+                            「자랑스러운 부산대인 상」 수상현장
+                        </div>
+                    </div>
+                    <div class="sub_list2">
+                        <div>
+                            <img src="img/sub_img3.jpg" alt="성년식">
+                        </div>
+                        <div class="sub_text">
+                            "스무 살 됐어요" 부산대 전통성년식 <br>
+                            「2022 효원성년제」 대면 개최
+                        </div>
+                    </div>
+                    <div class="sub_list3">
+                        <div>
+                            <img src="img/sub_img4.jpg" alt="콘서트">
+                        </div>
+                        <div class="sub_text">
+                            명품 학술강연 「PNU Research 콘서트」<br>
+                            첫 개최…네이처 정세영 교수 연구성과 소개
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+            <div class="inner">
+                <div class="copyright">
+                    <p class="p_copyright">
+                        부산캠퍼스 : 46241 부산광역시 금정구 부산대학로63번길 2 (장전동) TEL : 051.512.0311<br>
+                        양산캠퍼스 : 50612 경상남도 양산시 물금읍 부산대학로 49 TEL : 051. 512.0311<br>
+                        밀양캠퍼스 : 50463 경상남도 밀양시 삼랑진읍 삼랑진로 1268-50 TEL : 055.350.5100<br>
+                        아미캠퍼스 : 49241 부산광역시 서구 구덕로 179 (아미동 1가) TEL : 051.240.7000
+                    </p>
+                    <p class="m_copyright">
+                        부산캠퍼스 : 46241 부산광역시 금정구 부산대학로63번길 2
+                        <br> (장전동) TEL : 051.512.0311<br>
+                        양산캠퍼스 : 50612 경상남도 양산시 물금읍 부산대학로 49
+                        <br>
+                        TEL : 051. 512.0311
+                    </p>
+                    <p>
+                        Copyright 2022 Pusan National University. All rights reserved.
+                    </p>
+                </div>
+                <div class="logo_f">
+                    <img src="img/logo_f.png" alt="푸터로고">
+                </div>
+                <!-- 초기화 -->
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
