@@ -167,7 +167,7 @@ a h3{color: black;}
     .h_icon{display: none;}
     .h_menu div:nth-child(1), .h_menu div:nth-child(2){display: none;}
     .logo{margin: revert; left: 5%;}
-    .h_menu{padding-right: 5%;}
+    .h_menu{padding-right: 5%; width: 20%;}
 
     #mainimg .inner{width: 98%;}
     .main_text h1{font-size: 40px;}

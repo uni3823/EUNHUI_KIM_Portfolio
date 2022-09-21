@@ -115,7 +115,7 @@ h2{font-size: 42px; padding: 80px 0; text-align: center;}
     .h_icon{display: none;}
     .h_menu div:nth-child(1), .h_menu div:nth-child(2){display: none;}
     .logo{margin: 0; left: 5%;}
-    .h_menu{padding-right: 5%;}
+    .h_menu{padding-right: 5%; width: 20%;}
     
     h1{font-size: 40px;}
     #sub_mainimg{height: 502px;}
